@@ -47,7 +47,7 @@ class Persona {
 
 	method quiereEntrarA(carpa) = self.leGusta(carpa.marcaQueVende()) && self.cumplePreferenciaSobreMusica(carpa)
 
-	method cumplePreferenciaSobreMusica(carpa) = (escuchaMusicaTradicional && carpa.tieneBandaMusicaTradicional()) or (!escuchaMusicaTradicional && !carpa.tieneBandaMusicaTradicional())
+	method cumplePreferenciaSobreMusica(carpa) = escuchaMusicaTradicional == carpa.tieneBandaMusicaTradicional()
 
 	method puedeEntrar(carpa) = self.quiereEntrarA(carpa) && carpa.dejaIngresar(self)
 
