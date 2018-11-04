@@ -1,0 +1,61 @@
+import oktubreFest.*
+
+describe "test general" {
+
+	var corona = new CervezaRubia(cantLupulo = 5, paisDondeSeFabrica = "Mexico", graduacionAlcoholica = 12)
+	var hofbrau = new CervezaRoja(cantLupulo = 5, paisDondeSeFabrica = "Alemania")
+	var guiness = new CervezaNegra(cantLupulo = 10, paisDondeSeFabrica = "Irlanda")
+	var jarraTranqui = new Jarra(capacidad = 0.5, marcaCerveza = corona)
+	var jarraLoca = new Jarra(capacidad = 2, marcaCerveza = hofbrau)
+	var strugen = new Aleman(peso = 80, jarrasQueCompro = [ jarraLoca, jarraTranqui ], escuchaMusicaTradicional = false, aguante = 7)
+	var carpusa = new Carpa(limite = 10, tieneBandaMusicaTradicional = false, jarraQueVenden = jarraLoca)
+	var mamadovich = new Checo (peso = 110, jarrasQueCompro = [ jarraLoca ], escuchaMusicaTradicional = false, aguante = 40)
+	var tranquich = new Checo (peso = 110, jarrasQueCompro = [ jarraTranqui ], escuchaMusicaTradicional = false, aguante = 40)
+	var adolfo = new Aleman(peso = 80, jarrasQueCompro = [ jarraLoca ], escuchaMusicaTradicional = false, aguante = 7)
+
+	test "graduacion alcoholica de cervezas" {
+		assert.equals(10, hofbrau.graduacionAlcoholica())
+		assert.equals(8, guiness.graduacionAlcoholica())
+		assert.equals(12, corona.graduacionAlcoholica())
+	}
+
+	test "Ejercicio 1" {
+		assert.equals(0.06, jarraTranqui.contenidoDeAlcohol())
+	}
+
+	test "Ejercicio 2" {
+		assert.equals(0.26, strugen.alcoholQueIngirio())
+	}
+
+	test "Ejercicio 3" {
+		assert.that(strugen.estaEbria())
+	}
+
+	test "Ejercicio 4" {
+		assert.that(strugen.quiereEntrarA(carpusa))
+	}
+
+	test "Ejercicio 5" {
+		assert.notThat(carpusa.dejaIngresar(strugen))
+	}
+
+	test "Ejercicio 6" {
+		assert.notThat(strugen.puedeEntrar(carpusa))
+	}
+
+	test "Ejercicio 7" {
+		assert.throwsExceptionWithMessage("No cumple requisitos para ingresar", { strugen.ingresarA(carpusa)})
+	}
+	
+	test "Ejercicio 8" {
+		mamadovich.ingresarA(carpusa)
+		tranquich.ingresarA(carpusa)
+		assert.equals(1, carpusa.cuantosEbriosEmpedernidosHay())
+	}
+	
+	test "Ejercicio 9" {
+		assert.that(adolfo.esPatriota())
+		assert.notThat(strugen.esPatriota())
+	}
+
+}
